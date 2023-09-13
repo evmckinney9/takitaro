@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
+  <!-- Extension Name -->
+  <name>Export to Tailypo</name>
+
+  <!-- Unique Identifier for the extension -->
+  <id>org.github.evmckinney9.takitaro</id>
+
+  <!-- Dependencies, specify which script to run -->
+  <dependency type="executable" location="inx">takitaro.py</dependency>
+
+  <!-- Description -->
+  <label>Export layers to SVG with animation and other options.</label>
+
+  <!-- Output Directory Parameter -->
+  <param name="output-dir" type="path" mode="folder" _gui-text="Output directory">
+    <description>The output directory can be absolute or relative to the original SVG directory. Use "~" to address the home directory.</description>
+  </param>
+
+  <!-- Filename Prefix Parameter -->
+  <param name="prefix" type="string" _gui-text="Filenames prefix"></param>
+    <description>An output filename is [prefix][number_]label.ext".</description>
+  <param name="enumerate" type="boolean" _gui-text="Also add layer number to filenames ('001', '002', etc.)">false</param>
+
+
+  <!-- Include Bottom Layer in Animation -->
+  <param name="include_background" type="boolean" gui-text="Animate Bottom Layer">
+    <description>Specify whether the bottom-most layer should be included in the animation steps or treated as a fixed background. If set to true, the animation will start with the bottom layer and reveal each layer above it. If set to false, the bottom layer will be treated as a static background, and the animation will start from the second layer.</description>
+    <default>false</default>
+  </param>
+
+  <!-- Animation Style -->
+  <param name="animation_style" type="enum" gui-text="Animation Style">
+    <description>Select the style of animation for the exported SVG.</description>
+    <item value="ease">Ease</item>
+    <item value="ease-in">Ease In</item>
+    <item value="ease-out">Ease Out</item>
+    <item value="linear">Linear</item>
+  </param>
+
+  <!-- Effect Configuration -->
+  <effect needs-live-preview="false">
+    <object-type>path</object-type>
+    <effects-menu>
+      <submenu _name="Export"/>
+    </effects-menu>
+  </effect>
+
+  <!-- Script Execution Command -->
+  <script>
+    <command location="inx" interpreter="python">takitaro.py</command>
+  </script>
+</inkscape-extension>
